@@ -4,19 +4,12 @@ import java.util.Scanner;
 
 public class AnagramGenerator {
 
-    /**
-     * Generates all possible anagrams of the given string.
-     *
-     * @param input A string of distinct letters.
-     * @return A list of all anagrams of the input string.
-     * @throws IllegalArgumentException if the input is null, empty, or contains non-letter characters.
-     */
     public static List<String> generateAnagrams(String input) {
         if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException("Input must be a non-empty string.");
+            throw new IllegalArgumentException("A entrada deve ser uma string não vazia.");
         }
         if (!input.matches("[a-zA-Z]+")) {
-            throw new IllegalArgumentException("Input must contain only letters.");
+            throw new IllegalArgumentException("A entrada deve conter apenas letras.");
         }
 
         List<String> anagrams = new ArrayList<>();
@@ -40,13 +33,11 @@ public class AnagramGenerator {
     public static void main(String[] args) {
         String input = null;
 
-        // Check if input was passed as a command-line argument
         if (args.length > 0) {
             input = args[0];
         } else {
-            // Interactive mode (local execution)
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter a string of distinct letters to generate anagrams:");
+            System.out.println("🖊️ Digite uma string de letras distintas para gerar anagramas:");
             if (scanner.hasNextLine()) {
                 input = scanner.nextLine();
             }
@@ -55,12 +46,21 @@ public class AnagramGenerator {
 
         try {
             if (input == null || input.isEmpty()) {
-                throw new IllegalArgumentException("Input must be provided either as an argument or via interactive mode.");
+                throw new IllegalArgumentException("A entrada deve ser fornecida como argumento ou no modo interativo.");
             }
+
             List<String> anagrams = generateAnagrams(input);
-            System.out.println("Anagrams of '" + input + "': " + anagrams);
+
+            String blue = "\u001B[34m";
+            String green = "\u001B[32m";
+            String reset = "\u001B[0m";
+
+            System.out.println();
+            System.out.println(green + "🚀 Anagramas de '" + input + "' gerados com sucesso: 🚀" + reset);
+            System.out.println(blue + anagrams + reset);
         } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
+            String red = "\u001B[31m";
+            System.err.println(red + e.getMessage() + "\u001B[0m");
         }
     }
 }

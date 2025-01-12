@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       input_string:
-        description: "String of distinct letters for generating anagrams"
+        description: "Digite uma string de letras distintas para gerar anagramas"
         required: true
         default: "java"
 
@@ -32,4 +32,4 @@ jobs:
 
     - name: Run the application
       working-directory: ./AnagramGenerator
-      run: mvn exec:java -Dexec.mainClass="AnagramGenerator" -Dexec.args="${{ github.event.inputs.input_string }}"
+      run: mvn -q exec:java -Dexec.mainClass="AnagramGenerator" -Dexec.args="${{ github.event.inputs.input_string }}"
