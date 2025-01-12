@@ -6,7 +6,7 @@ on:
       input_string:
         description: "String of distinct letters for generating anagrams"
         required: true
-        default: "java"
+        default: "abc"
 
 jobs:
   build-test-run:
@@ -23,10 +23,13 @@ jobs:
         distribution: 'temurin'
 
     - name: Build project
+      working-directory: ./AnagramGenerator
       run: mvn compile
 
     - name: Run tests
+      working-directory: ./AnagramGenerator
       run: mvn test
 
     - name: Run the application
+      working-directory: ./AnagramGenerator
       run: mvn exec:java -Dexec.mainClass="AnagramGenerator" -Dexec.args="${{ github.event.inputs.input_string }}"
