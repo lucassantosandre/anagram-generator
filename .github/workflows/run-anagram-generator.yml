@@ -1,0 +1,32 @@
+name: Run Anagram Generator
+
+on:
+  workflow_dispatch:
+    inputs:
+      input_string:
+        description: "String of distinct letters for generating anagrams"
+        required: true
+        default: "java"
+
+jobs:
+  build-test-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Build project
+      run: mvn compile
+
+    - name: Run tests
+      run: mvn test
+
+    - name: Run the application
+      run: mvn exec:java -Dexec.mainClass="AnagramGenerator" -Dexec.args="${{ github.event.inputs.input_string }}"
