@@ -30,6 +30,6 @@ jobs:
       working-directory: ./AnagramGenerator
       run: mvn test
 
-    - name: Run the application
+    - name: Criando anagramas
       working-directory: ./AnagramGenerator
       run: mvn -q exec:java -Dexec.mainClass="AnagramGenerator" -Dexec.args="${{ github.event.inputs.input_string }}"
