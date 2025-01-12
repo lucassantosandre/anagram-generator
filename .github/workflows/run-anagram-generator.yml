@@ -6,7 +6,7 @@ on:
       input_string:
         description: "String of distinct letters for generating anagrams"
         required: true
-        default: "abc"
+        default: "java"
 
 jobs:
   build-test-run:
